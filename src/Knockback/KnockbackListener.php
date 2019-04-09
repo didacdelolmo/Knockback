@@ -26,14 +26,19 @@ class KnockbackListener implements Listener {
      * @param EntityDamageEvent $event
      */
     public function onDamage(EntityDamageEvent $event): void {
-        $config = $this->plugin->getConfig();
-        $allowedWorlds = $config->get("allowed_attack_delay_worlds");
+        $settings = $this->plugin->getSettings();
+
+        $allowedWorlds = $settings->getAllowedWorlds();
+        if(empty($allowedWorlds)) {
+            return;
+        }
+
         foreach($allowedWorlds as $world) {
             if($event->getEntity()->getLevel()->getName() != $world) {
                 continue;
             }
 
-            $event->setAttackCooldown($config->getNested("attack_delay"));
+            $event->setAttackCooldown($settings->getAttackDelay());
             return;
         }
     }
@@ -42,7 +47,11 @@ class KnockbackListener implements Listener {
      * @param EntityDamageByEntityEvent $event
      */
     public function onFight(EntityDamageByEntityEvent $event): void {
-        $event->setKnockBack($this->plugin->getConfig()->getNested("knockback"));
+        $settings = $this->plugin->getSettings();
+
+        if($settings->isEnableKnockback()) {
+            $event->setKnockBack($settings->getKnockback());
+        }
     }
 
 }

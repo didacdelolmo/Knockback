@@ -40,8 +40,8 @@ class AttackDelayCommand extends Command {
             return;
         }
 
-        $this->plugin->getConfig()->set("attack_delay", $args[0]);
-        $sender->sendMessage("§aYou have set attack delay to §f$args[1]§a!");
+        $this->plugin->getSettings()->setAttackDelay((int) $args[0]);
+        $sender->sendMessage("§aYou have set attack delay to §f$args[0]§a!");
     }
 
 }

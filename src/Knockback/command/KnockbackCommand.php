@@ -53,7 +53,7 @@ class KnockbackCommand extends Command {
                     break;
                 }
 
-                $this->setKnockback($args[1]);
+                $this->setKnockback((float) $args[1]);
                 $sender->sendMessage("§aYou have set knockback to §f$args[1]§a!");
                 break;
         }
@@ -63,14 +63,14 @@ class KnockbackCommand extends Command {
      * @param bool $bool
      */
     public function allowKnockback(bool $bool = true): void {
-        $this->plugin->getConfig()->set("enable_knockback", $bool);
+        $this->plugin->getSettings()->setEnableKnockback($bool);
     }
 
     /**
      * @param float $knockback
      */
     public function setKnockback(float $knockback): void {
-        $this->plugin->getConfig()->set("knockback", $knockback);
+        $this->plugin->getSettings()->setKnockback($knockback);
     }
 
 }
