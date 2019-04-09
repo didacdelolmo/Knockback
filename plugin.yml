@@ -1,0 +1,9 @@
+name: Knockback
+description: A designed custom core for UltimateGodClan servers using PocketMine API
+author: Diduhless
+website: https://twitter.com/Diduhless
+main: Knockback\Knockback
+version: "1.0.0"
+api: 3.0.0
+
+
